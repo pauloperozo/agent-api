@@ -1,16 +1,14 @@
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.output_parsers import StrOutputParser
 from src.core.config import settings
-from langchain_core.messages import HumanMessage
 from src.app.v1.ai.schemas import AiResponse
 
 class AiService:
     
     def __init__(self):
         llm = ChatOpenAI(
-            model="gpt-4o-mini",
-            temperature=0.7,
+            model=settings.MODEL,
+            temperature=settings.MODEL_TEMPERATURE,
             api_key=settings.OPENAI_API_KEY
         )
 
@@ -19,12 +17,12 @@ class AiService:
             ("human", "{enquiry}")
         ])
 
-        self.chain = prompt | llm | StrOutputParser()
+        self.chain = prompt | llm 
 
     async def execute_openai(self, enquiry: str) -> AiResponse:
         try:
             response = await self.chain.ainvoke({"enquiry": enquiry})
-            return AiResponse(message=response)
+            return AiResponse(message=response.content)
 
         except Exception as e:
             print(f"[OpenaiService] Error executing OpenAI request: {str(e)}")

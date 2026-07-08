@@ -13,6 +13,8 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
     OPENAI_API_KEY: str
     OPENAI_SYSTEM_PROMPT: str
+    MODEL: str = "gpt-4o-mini"
+    MODEL_TEMPERATURE: float = 0.7
 
     model_config = SettingsConfigDict(
         env_file=".env",            
