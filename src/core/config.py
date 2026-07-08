@@ -12,7 +12,8 @@ class Settings(BaseSettings):
     SECRET_KEY: str = "super-secret-default-key-change-in-production"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
     OPENAI_API_KEY: str
-    
+    OPENAI_SYSTEM_PROMPT: str
+
     model_config = SettingsConfigDict(
         env_file=".env",            
         env_file_encoding="utf-8",  
