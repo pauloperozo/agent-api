@@ -11,7 +11,8 @@ class Settings(BaseSettings):
     DATABASE_URL: str = "sqlite:///database.db"
     SECRET_KEY: str = "super-secret-default-key-change-in-production"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
-
+    OPENAI_API_KEY: str
+    
     model_config = SettingsConfigDict(
         env_file=".env",            
         env_file_encoding="utf-8",  

@@ -11,7 +11,7 @@ InjectedAiService = Annotated[AiService, Depends(AiService)]
 chat_router = APIRouter(prefix="/chat", tags=["Chat"])
 
 @chat_router.post("/", response_model=ChatResponse)
-def chat_enquiry(body: ChatRequest, ai_service: InjectedAiService):
-    result = ai_service.execute_openai(body.enquiry)
-    response = ChatResponse(message=result)
+async def chat_enquiry(body: ChatRequest, ai_service: InjectedAiService):
+    result = await ai_service.execute_openai(body.enquiry)
+    response = ChatResponse(message=result["message"])
     return response
