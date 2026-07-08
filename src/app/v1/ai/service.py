@@ -16,7 +16,6 @@ class AiService:
 
             messages = [HumanMessage(content=enquiry)]
             response = await self.llm.ainvoke(messages)
-            print(f"[OpenaiService] OpenAI direct response: {response.content}")
             return AiResponse(message=response.content)
 
         except Exception as e:
