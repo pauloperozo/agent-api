@@ -15,7 +15,8 @@ class Settings(BaseSettings):
     OPENAI_SYSTEM_PROMPT: str
     MODEL: str = "gpt-4o-mini"
     MODEL_TEMPERATURE: float = 0.7
-
+    EXCHANGE_RATE_BASE_URL: str
+    EXCHANGE_RATE_API_KEY: str
     model_config = SettingsConfigDict(
         env_file=".env",            
         env_file_encoding="utf-8",  
