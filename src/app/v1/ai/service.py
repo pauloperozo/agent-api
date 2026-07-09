@@ -1,3 +1,4 @@
+from fastapi.params import Depends
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.tools import StructuredTool
@@ -8,15 +9,13 @@ from src.app.v1.ai.schemas import AiResponse
 
 class AiService:
     
-    def __init__(self):
+    def __init__(self,tools_service: ToolsService = Depends()):
         
         llm = ChatOpenAI(
             model=settings.MODEL,
             temperature=settings.MODEL_TEMPERATURE,
             api_key=settings.OPENAI_API_KEY
         )
-
-        tools_service = ToolsService()
         
         currency_tool = StructuredTool.from_function(
             coroutine=tools_service.convert_currencies,
